@@ -7,11 +7,13 @@ $_SESSION['message1'] = '';
 $user = $_SESSION['username'];
 
 
+
 $mysqli = new mysqli("localhost", "root", "", "filerproject");
 $sql = "SELECT *  FROM `image` WHERE user = '$user'";
 $sth = $mysqli->query($sql);
-$imgname = '{$row["name"]}';
+$imgname = '{$row["name"]}' ;
 $filepath = "uploaded/".$imgname;
+
 echo "<table>";
 
 
@@ -25,24 +27,26 @@ while ($row=mysqli_fetch_array($sth)) {
     ?><td><input type="submit" name="edit" value="edit" ></a></td> <?php
 
       if (isset($_POST['edit'])) {
+      echo "<form  method='post' enctype='multipart/form-data'>";
+        echo "<input type='text' name='file' placeholder= {$row ['name']} >";
+        echo "<input type='submit' name='rename' value='rename'>";
+        echo"</form>";
+        if (isset($_POST['rename'])) {
+     $tmp_file = $_FILES['image']['tmp_name'];
+     $ext = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+     $rand = md5(uniqid().rand());
+     $post_image = $rand.".".$ext;
+     move_uploaded_file($tmp_file,"../uploaded/".$post_image);
+  }
 
-        echo "<input type='text' value='$nname' placeholder= {$row ['name']} >";
-        echo "<button name='rename' >rename</button>";
-    }
-            if (isset($_POST['rename'])) {
-                rename($row["name"], $nname);
 
-
-
-
-            }
+}
 
 
     ?><td><a href="delete.php?id=<?php echo $row["id"]; ?>">Delete</a></td> <?php
-    ?><td><a href="<?php $filepath ?>" Download="<?php $imgname ?>" >Download</a> </td> <?php
+    ?><td><a href='download.php'>Download</a> </td> <?php
 
-    var_dump($filepath);
+
 }
-
 
 ?>

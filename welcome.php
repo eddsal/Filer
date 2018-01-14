@@ -15,29 +15,45 @@ $mysqli = new mysqli("localhost", "root", "", "filerproject");
 		$filetmp =$_FILES["image"]["tmp_name"];
     $type = addslashes($_FILES['image']['type']);
 		$filepath = "uploaded/".$imgname;
-	   move_uploaded_file($filetmp,$filepath);
-
-
-
-
 
 
     if(empty($type)){
      $_SESSION['message'] = "Please Select Image File.";
 		 $uploadOk = 0;
-
-  }else {
+  }
+	else {
+		   move_uploaded_file($filetmp,$filepath);
     $q =  "INSERT INTO image (name, image, user) "
     . "VALUES ('$imgname', '$filetmp', '$user')";
 
 
-              mysqli_query($mysqli, $q);
-               $_SESSION['message1'] = "your image has been succesfuly uploaded.";
+      mysqli_query($mysqli, $q);
+     $_SESSION['message1'] = "your image has been succesfuly uploaded.";
 
   }
 
 
+
 }
+#if (file_exists($filepath))     {
+ #       $i=1;
+ #	$new_path=$filepath;
+	#    while (file_exists($new_path))
+		#    {
+	#        $extension = pathinfo($filepath, PATHINFO_EXTENSION);
+		#        $filename = pathinfo($filepath, PATHINFO_FILENAME);
+		#				$directory=dirname($filepath);
+	#        $new_filename = $filename . '-' . $i . '.' . $extension;
+		#        $new_path = $directory . $new_filename;
+			#    		$i++;
+		#  }
+	#	if(!rename($filepath, $new_path)){
+	#	echo 'error renaming file';
+		#}
+	#...if (file_exists("uploaded/" . $_FILES["image"]["name"]))
+	#...			{
+		#...			$_SESSION['message']=" already exists. ";
+#...
 ?>
 
  <!DOCTYPE html>

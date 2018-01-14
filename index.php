@@ -31,9 +31,13 @@ ob_start();
 
 ?>
 <script>
-  var cancelbtn = getElementByClassName('.cancelbtn').onclick = function() {
-    style.display='none';
+window.onload = function(){
+  var cancelbtn =document.getElementById("cancelbtn").onclick = function(){
+
+  document.getElementById('container').style.display="none";
   }
+
+}
   </script>
 
 
@@ -57,7 +61,9 @@ ob_start();
 
       <button type="submit" name="login">Login</button>
       <input type="checkbox" checked="checked"> Remember me
-    </div>
-      <button type="button" class="cancelbtn">Cancel</button>
+
+      <button type="button" id="cancelbtn">Cancel</button>
       <span class=New_Acc><a href="CreateNewAccount.php">create new account?</a></span>
+          </div>
   </form>
+  

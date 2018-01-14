@@ -28,7 +28,9 @@ $mysqli = new mysqli("localhost", "root", "", "filerproject");
                       elseif  ($email==$row['email'])
                       {
                         $_SESSION['message'] = "Email already exists";
-                      } 
+                      }
+
+
 
 
 
@@ -80,6 +82,7 @@ $mysqli = new mysqli("localhost", "root", "", "filerproject");
       <input type="email" placeholder="Email" name="email" required />
       <input type="password" placeholder="Password" name="password" autocomplete="new-password" required />
       <input type="password" placeholder="Confirm Password" name="confirmpassword" autocomplete="new-password" required />
+
       <input type="submit" value="Register" name="register" class="btn btn-block btn-primary" />
     </form>
   </div>
